@@ -1,0 +1,1 @@
+from dash_dynamic_images._callback import callback as image_callback
