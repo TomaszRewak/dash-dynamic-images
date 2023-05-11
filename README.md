@@ -80,6 +80,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash_dynamic_images import image_callback
+from PIL import Image, ImageDraw
 
 
 app = dash.Dash()
@@ -98,7 +99,7 @@ app.layout = html.Div(children=[
 def generate_image(x, y):
     image = Image.new('RGB', (200, 200), color=(0, 0, 200))
     ImageDraw.Draw(image).line([(0, 0), (x, y)], width=5)
-    return 
+    return image
 
 
 if __name__ == '__main__':
