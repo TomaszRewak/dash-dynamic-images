@@ -114,6 +114,10 @@ Whenever an `image_callback` is registered, the library performs two operations:
 
 In practice, whenever one of the `image_callback` input parameters change, a new url is generated and inserted into the `src` property of the `Img` element, which in orders triggers a process of requesting and producing a new image.
 
+The generated images are not persisted in the file system.
+
+The library is aligned with the stateless nature of the Dash framework and therefor is compatible with its horizontal scaling capabilities (where a single application can be served by multiple processes and/or machines).
+
 # Motivation
 
 This library aims at simplifying the process described in the previous section so that it can be achieved through a single line of a python code.
