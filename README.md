@@ -1,6 +1,6 @@
 # dash-dynamic-images
 
-A library that helps with embedding dynamic and generative images into Plotly Dash application.
+A library that helps with embedding dynamic and generative images into Plotly Dash applications.
 
 # Setting up
 
@@ -12,7 +12,7 @@ pip install dash-dynamic-images
 
 **2. Add an `html.Img` element to your page's layout**
 
-This step does not differ in any way from the regular process of writing layout for Dash applications.
+This step does not differ in any way from the regular process of writing layouts for Dash applications.
 
 ```python
 import dash_html_components as html
@@ -33,7 +33,7 @@ You can use `image_callback` decorator to create callbacks that return dynamic i
 
 - The first argument of the decorator should be an instance of the `Dash` object.
 - The callback should have only one output, pointing at the `src` property of an `Img` layout element.
-- The decorated function should return a `PIL.Image.Image` object (from the `Pillow` library).
+- The decorated function should return a `PIL.Image.Image` object (from the `Pillow` python library).
 
 ```python
 from dash_dynamic_images import image_callback
@@ -55,6 +55,10 @@ def generate_image(x, y):
 As long as the returned object is a Pillow image, it does not matter on how was it create. You can generate it from scratch or obtain it from an external provider.
 
 ```python
+import requests
+
+...
+
 @image_callback(
     app,
     dash.Output('image', 'src'),
@@ -103,13 +107,13 @@ if __name__ == '__main__':
 
 # How it works
 
-Whenever an `image_callback` is registered, the library performs two actions:
+Whenever an `image_callback` is registered, the library performs two operations:
 
-- Registers a `flask` route with a path of `/image_generator/{unique_guid}.png` that generates and serves images whenever called.
-- Registers a standard `Dash` callback that produces and returns a parametrized (through the query string) image url based on the `image_callback` input values.
+- It registers a `flask` route with a path of `/image_generator/{unique_guid}.png` that generates and serves images whenever invoked.
+- It registers a standard `Dash` callback that produces and returns a parametrized (through the query string) image url based on the `image_callback` input values.
 
-So in practice, whenever one of the `image_callback` input parameters are changed, a new url is generated and inserted into the `src` property of the `Img` element, which in orders triggers a process of requesting and producing of a new image.
+In practice, whenever one of the `image_callback` input parameters change, a new url is generated and inserted into the `src` property of the `Img` element, which in orders triggers a process of requesting and producing a new image.
 
 # Motivation
 
-This library aims at simplifying the process described in the previous section do that it can be described through a single line of a python code.
+This library aims at simplifying the process described in the previous section so that it can be achieved through a single line of a python code.
